@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор Агростартапа</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-seedling"></i> Калькулятор Агростартапа</h1>
+            <p class="subtitle">Расчет бизнес-плана для получения гранта на развитие сельского хозяйства</p>
+        </header>
+
+        <div class="app-container">
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-user-circle"></i> Информация о проекте
+                </div>
+
+                <div class="project-info">
+                    <div class="project-field">
+                        <label for="projectName">Название проекта</label>
+                        <input type="text" id="projectName" placeholder="Введите название проекта">
+                    </div>
+                    <div class="project-field">
+                        <label for="fullName">ФИО руководителя</label>
+                        <input type="text" id="fullName" placeholder="Введите ФИО">
+                    </div>
+                </div>
+
+                <div class="section-title">
+                    <i class="fas fa-calculator"></i> Тип расчета
+                </div>
+
+                <div class="calculation-type">
+                    <div class="type-btn active" data-type="plant">Растениеводство</div>
+                    <div class="type-btn" data-type="animal">Животноводство</div>
+                    <div class="type-btn" data-type="production">Переработка</div>
+                </div>
+            </div>
+
+            <!-- Секция растениеводства -->
+            <div class="calculation-section active" id="plant-section">
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-leaf"></i> Параметры растениеводства
+                    </div>
+
+                    <div class="years-control">
+                        <label for="yearsCountPlant">Период расчета (лет):</label>
+                        <div class="years-slider">
+                            <input type="range" id="yearsCountPlant" min="3" max="10" value="5" class="slider">
+                        </div>
+                        <div class="years-display" id="yearsDisplayPlant">5 лет</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Средства гранта (тыс. руб.)</label>
+                        <input type="number" id="grantAmountPlant" value="5000" min="0">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Площадь, га (1 год)</label>
+                            <input type="number" id="areaYear1" value="20" min="0" step="0.1">
+                            <div class="formula-info">Базовое значение площади в первый год</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Урожайность, ц/га</label>
+                            <input type="number" id="yieldPerHa" value="40" min="0" step="0.1">
+                            <div class="formula-info">Средняя урожайность культуры</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Цена, руб./т</label>
+                            <input type="number" id="pricePerTonPlant" value="21000" min="0">
+                            <div class="formula-info">Рыночная цена тонны продукции</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Ежегодный прирост площади, га</label>
+                            <input type="number" id="areaGrowth" value="10" min="0" step="0.1">
+                            <div class="formula-info">Увеличение площади каждый год</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Коэффициент товарной продукции</label>
+                            <input type="number" id="productCoefficientPlant" value="1" min="0" max="1" step="0.1">
+                            <div class="formula-info">Доля продукции, идущая на продажу</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Налоговая ставка</label>
+                            <input type="number" id="taxRatePlant" value="0.06" min="0" max="1" step="0.01">
+                            <div class="formula-info">Ставка налога на прибыль</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Сырье и материалы (тыс. руб./год)</label>
+                            <input type="number" id="rawMaterialsPlant" value="12345" min="0">
+                            <div class="formula-info">Затраты на семена, удобрения, СЗР</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Прочие расходы (тыс. руб./год)</label>
+                            <input type="number" id="otherCostsPlant" value="500" min="0">
+                            <div class="formula-info">Транспорт, электроэнергия, обслуживание</div>
+                        </div>
+                    </div>
+
+                    <button class="btn" id="calculatePlant">
+                        <i class="fas fa-calculator"></i> Рассчитать растениеводство
+                    </button>
+                </div>
+            </div>
+
+            <!-- Секция животноводства -->
+            <div class="calculation-section" id="animal-section">
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-paw"></i> Параметры животноводства
+                    </div>
+
+                    <div class="years-control">
+                        <label for="yearsCountAnimal">Период расчета (лет):</label>
+                        <div class="years-slider">
+                            <input type="range" id="yearsCountAnimal" min="3" max="10" value="5" class="slider">
+                        </div>
+                        <div class="years-display" id="yearsDisplayAnimal">5 лет</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Средства гранта (тыс. руб.)</label>
+                        <input type="number" id="grantAmountAnimal" value="5000" min="0">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Поголовье (1 год), гол.</label>
+                            <input type="number" id="livestockYear1" value="15" min="0">
+                            <div class="formula-info">Начальное поголовье животных</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Надой, кг/гол. в день</label>
+                            <input type="number" id="milkPerAnimal" value="30" min="0" step="0.1">
+                            <div class="formula-info">Среднесуточный надой на 1 голову</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Привес, кг/гол. в год</label>
+                            <input type="number" id="weightGain" value="520" min="0" step="0.1">
+                            <div class="formula-info">Среднегодовой привес на 1 голову</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Ежегодный прирост поголовья, гол.</label>
+                            <input type="number" id="livestockGrowth" value="2" min="0">
+                            <div class="formula-info">Увеличение поголовья каждый год</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Цена молока, руб./т</label>
+                            <input type="number" id="milkPrice" value="35000" min="0">
+                            <div class="formula-info">Рыночная цена тонны молока</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Цена мяса, руб./т</label>
+                            <input type="number" id="meatPrice" value="280000" min="0">
+                            <div class="formula-info">Рыночная цена тонны мяса</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Период лактации, дней</label>
+                            <input type="number" id="lactationPeriod" value="305" min="0">
+                            <div class="formula-info">Количество дней дойного периода</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Коэффициент товарной продукции</label>
+                            <input type="number" id="productCoefficientAnimal" value="1" min="0" max="1" step="0.1">
+                            <div class="formula-info">Доля продукции, идущая на продажу</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Налоговая ставка</label>
+                            <input type="number" id="taxRateAnimal" value="0.06" min="0" max="1" step="0.01">
+                            <div class="formula-info">Ставка налога на прибыль</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Сырье и материалы (тыс. руб./год)</label>
+                            <input type="number" id="rawMaterialsAnimal" value="15000" min="0">
+                            <div class="formula-info">Корма, ветпрепараты, подстилка</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Прочие расходы (тыс. руб./год)</label>
+                            <input type="number" id="otherCostsAnimal" value="1000" min="0">
+                            <div class="formula-info">Электроэнергия, вода, обслуживание</div>
+                        </div>
+                    </div>
+
+                    <button class="btn" id="calculateAnimal">
+                        <i class="fas fa-calculator"></i> Рассчитать животноводство
+                    </button>
+                </div>
+            </div>
+
+            <!-- Секция переработки -->
+            <div class="calculation-section" id="production-section">
+                <div class="section">
+                    <div class="section-title">
+                        <i class="fas fa-industry"></i> Параметры переработки
+                    </div>
+
+                    <div class="years-control">
+                        <label for="yearsCountProduction">Период расчета (лет):</label>
+                        <div class="years-slider">
+                            <input type="range" id="yearsCountProduction" min="3" max="10" value="5" class="slider">
+                        </div>
+                        <div class="years-display" id="yearsDisplayProduction">5 лет</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Средства гранта (тыс. руб.)</label>
+                        <input type="number" id="grantAmountProduction" value="2700" min="0">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Производственная мощность (1 год), т/сут.</label>
+                            <input type="number" id="capacityYear1" value="0.02" min="0" step="0.0001">
+                            <div class="formula-info">Мощность линии переработки в сутки</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Ежегодный рост мощности, т/сут.</label>
+                            <input type="number" id="capacityGrowth" value="0.01" min="0" step="0.0001">
+                            <div class="formula-info">Увеличение мощности каждый год</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Цена продукции, руб./т</label>
+                            <input type="number" id="pricePerTonProduction" value="350000" min="0">
+                            <div class="formula-info">Рыночная цена тонны готовой продукции</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Рабочих дней в году</label>
+                            <input type="number" id="workingDays" value="247" min="0">
+                            <div class="formula-info">Количество дней работы в году</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Сырье и материалы (тыс. руб./год)</label>
+                            <input type="number" id="rawMaterialsProduction" value="300" min="0">
+                            <div class="formula-info">Сырье, упаковка, вспомогательные материалы</div>
+                        </div>
+                        <div class="input-field">
+                            <label>Налоговая ставка</label>
+                            <input type="number" id="taxRateProduction" value="0.06" min="0" max="1" step="0.01">
+                            <div class="formula-info">Ставка налога на прибыль</div>
+                        </div>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label>Прочие расходы (тыс. руб./год)</label>
+                            <input type="number" id="otherCostsProduction" value="800" min="0">
+                            <div class="formula-info">Электроэнергия, транспорт, маркетинг</div>
+                        </div>
+                    </div>
+
+                    <button class="btn" id="calculateProduction">
+                        <i class="fas fa-calculator"></i> Рассчитать переработку
+                    </button>
+                </div>
+            </div>
+
+            <!-- Результаты расчета -->
+            <div class="results-section hidden" id="resultsSection">
+                <h2 class="results-title">
+                    <i class="fas fa-chart-line"></i> Результаты расчета
+                </h2>
+
+                <div id="projectSummary" class="project-summary"></div>
+
+                <div class="results-grid" id="keyResults"></div>
+
+                <h3 class="section-title" style="margin-top: 30px;">
+                    <i class="fas fa-table"></i> Детализированные результаты по годам
+                </h3>
+
+                <div id="detailedResults"></div>
+
+                <div id="parametersList" class="parameter-list"></div>
+
+                <div class="export-options">
+                    <button class="btn btn-secondary" id="exportJson">
+                        <i class="fas fa-file-code"></i> Экспорт JSON
+                    </button>
+                    <button class="btn" id="exportDocx">
+                        <i class="fas fa-file-word"></i> Экспорт DOCX
+                    </button>
+                    <button class="btn btn-danger" id="printResults">
+                        <i class="fas fa-print"></i> Печать
+                    </button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn" id="newCalculation">
+                        <i class="fas fa-redo"></i> Новый расчет
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с формулами -->
+    <div id="formulaModal" class="hidden">
+        <div class="modal-content">
+            <h3><i class="fas fa-calculator"></i> Формулы расчета</h3>
+            <div id="formulaContent"></div>
+            <button class="btn close-modal">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Подключаем библиотеки для DOCX -->
+    <script src="https://unpkg.com/docx@8.0.0/build/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <!-- Подключаем наши скрипты -->
+    <script src="main.js"></script>
+</body>
+</html>
